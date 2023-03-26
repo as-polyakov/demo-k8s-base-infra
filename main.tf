@@ -1,3 +1,9 @@
+terraform {  
+backend "s3" {  
+      
+  }  
+}
+
 variable "cluster_name" {type=string}
 module eks {
     source = "./modules/eks"

@@ -99,17 +99,16 @@ data "kubernetes_secret" "argocd-sa" {
     namespace = "default"
   }
   depends_on = [
-    "kubernetes_service_account.argocd-sa",
+    kubernetes_service_account.argocd-sa,
   ]
 }
 
 provider "kubernetes" {
-  host                   = module.eks.cluster_endpoint
+  host                   = data.aws_eks_cluster.cluster.endpoint
   cluster_ca_certificate = "${base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)}"
   token                  = data.aws_eks_cluster_auth.cluster.token
   #load_config_file       = false
 }
-
 
 
 module "eks" {

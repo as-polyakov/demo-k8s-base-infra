@@ -70,7 +70,11 @@ resource "kubernetes_secret" "argocd-sa" {
   metadata {
     name = "argocd-sa"
     namespace = "default"
+	annotations = {
+		"kubernetes.io/service-account.name" = "argocd-sa"
+    }
   }
+    type="kubernetes.io/service-account-token"
 }
 
 resource "kubernetes_cluster_role_binding" "argocd-sa" {
@@ -90,7 +94,7 @@ resource "kubernetes_cluster_role_binding" "argocd-sa" {
 }
 
 output "argocd-sa-bearer" {
-  value = "${data.kubernetes_secret.argocd-sa.data["token"]}"
+  value = try(data.kubernetes_secret.argocd-sa.data["token"], "")
 }
 
 data "kubernetes_secret" "argocd-sa" {

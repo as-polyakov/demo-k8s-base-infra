@@ -59,8 +59,6 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.10.3"
 
-  create_cloudwatch_log_group = false
-  create_kms_key = false
   cluster_name    = var.cluster_name
   cluster_version = "1.24"
   cluster_timeouts = {

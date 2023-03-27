@@ -30,8 +30,8 @@ output "cluster_name" {
         value       = module.eks.cluster_name
 }
 
-output "cluster_token" {
-    value = module.eks.cluster_token
+output "argocd_sa_bearer" {
+    value = module.eks.argocd-sa-bearer
         sensitive = true
 }
 output "cluster_ca_certificate" {

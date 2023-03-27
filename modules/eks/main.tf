@@ -39,13 +39,33 @@ module "vpc" {
   }
 }
 
+data "aws_eks_cluster_auth" "cluster" {
+    name = module.eks.cluster_id
+}
+
+data "aws_eks_cluster" "cluster" {
+    name = module.eks.cluster_id
+}
+
+output "cluster_token" {
+  value = data.aws_eks_cluster_auth.cluster.token
+}
+
+output "cluster_ca_certificate" {
+    value = "${base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)}"
+}
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "19.5.1"
+  version = "19.10.3"
 
+  create_cloudwatch_log_group = false
+  create_kms_key = false
   cluster_name    = var.cluster_name
   cluster_version = "1.24"
-  cluster_create_timeout        = "15m"
+  cluster_timeouts = {
+    create = "15m"
+  }
 
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.private_subnets

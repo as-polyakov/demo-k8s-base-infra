@@ -1,8 +1,8 @@
-# terraform {  
-# backend "s3" {  
-#       
-#   }  
-# }
+terraform {  
+backend "s3" {  
+      
+  }  
+}
 
 variable "cluster_name" {type=string}
 module eks {

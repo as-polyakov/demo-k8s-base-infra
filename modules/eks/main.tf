@@ -76,6 +76,9 @@ module "eks" {
       desired_size = 1
     }
   }
+    timeouts {
+    create = "30m"
+  }
 }
     
 

@@ -45,6 +45,7 @@ module "eks" {
 
   cluster_name    = var.cluster_name
   cluster_version = "1.24"
+  cluster_create_timeout        = "15m"
 
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.private_subnets
@@ -75,9 +76,6 @@ module "eks" {
       max_size     = 2
       desired_size = 1
     }
-  }
-    timeouts {
-    create = "30m"
   }
 }
     

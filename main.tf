@@ -30,3 +30,10 @@ output "cluster_name" {
   value       = module.eks.cluster_name
 }
 
+output "cluster_token" {
+    value = module.eks.cluster_token
+}
+output "cluster_ca_certificate" {
+    value = ${base64decode(module.cluster_ca_certificate)
+}
+

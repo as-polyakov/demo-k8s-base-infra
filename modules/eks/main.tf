@@ -41,10 +41,12 @@ module "vpc" {
 
 data "aws_eks_cluster_auth" "cluster" {
     name = module.eks.cluster_name
+    depends_on = [module.eks.cluster_id]
 }
 
 data "aws_eks_cluster" "cluster" {
     name = module.eks.cluster_name
+    depends_on = [module.eks.cluster_id]
 }
 
 output "cluster_token" {

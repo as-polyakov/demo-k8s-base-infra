@@ -78,7 +78,7 @@ resource "kubernetes_secret" "argocd-sa" {
     }
   }
     type="kubernetes.io/service-account-token"
-    depends_on = [module.eks.cluster_id]
+    depends_on = [module.eks.cluster_id, kubernetes_service_account.argocd-sa]
 }
 
 resource "kubernetes_cluster_role_binding" "argocd-sa" {

@@ -66,6 +66,7 @@ resource "kubernetes_service_account" "argocd-sa" {
   secret {
     name = "${kubernetes_secret.argocd-sa.metadata.0.name}"
   }
+  depends_on = [module.eks.cluster_id]
 }
 
 resource "kubernetes_secret" "argocd-sa" {
@@ -77,6 +78,7 @@ resource "kubernetes_secret" "argocd-sa" {
     }
   }
     type="kubernetes.io/service-account-token"
+    depends_on = [module.eks.cluster_id]
 }
 
 resource "kubernetes_cluster_role_binding" "argocd-sa" {

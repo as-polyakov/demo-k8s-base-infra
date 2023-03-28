@@ -63,9 +63,9 @@ resource "kubernetes_service_account" "argocd-sa" {
     name = "argocd-sa"
     namespace = "default"
   }
-  secret {
-    name = "${kubernetes_secret.argocd-sa.metadata.0.name}"
-  }
+  #secret {
+  #  name = "${kubernetes_secret.argocd-sa.metadata.0.name}"
+  #}
   depends_on = [module.eks.cluster_id]
 }
 
